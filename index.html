@@ -13,20 +13,33 @@
 
       <nav>
         <ul>
-          <li>Game</li>
-          <li>Level</li>
-          <li>About</li>
+          <!-- <li>New Game</li> -->
+          <li class="dropdown">
+            New Game
+            <div class="dropdown-content">
+              <a href="#" id="beginner">Beginner</a>
+              <a href="#" id="intermediate">Intermediate</a>
+              <a href="#" id="advance">Advance</a>
+            </div>
+          </li>
+
+          <li><a href="about.html" id="about-page">About</a></li>
         </ul>
       </nav>
-
-      <div id="complete-game">
-        <div id="game-nav">
-          <button id="right-side-box">mine remain</button>
-          <button id="reset-button">😊</button>
-          <button id="left-side-box">timer</button>
-        </div>
-        <div id="grid">this is the game grid</div>
-      </div>
     </header>
+
+    <div id="complete-game">
+      <div id="game-nav">
+        <button id="right-side-box" class="game-displayer" disabled>
+          mine remain
+        </button>
+        <button id="reset-button" class="game-displayer"><b>😊</b></button>
+        <button id="left-side-box" class="game-displayer" disabled>
+          timer
+        </button>
+      </div>
+      <div id="grid"></div>
+    </div>
+    <button><a href="./page1.html">PAGE1</a></button>
   </body>
 </html>

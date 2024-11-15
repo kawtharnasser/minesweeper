@@ -1,48 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Teko:wght@300..700&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 body {
+  background-color: rgb(255, 255, 255);
+  margin: 0;
+  text-align: center;
+  font-family: 'Teko', sans-serif;
+  font-size: 1.2em;
 }
 
 h1 {
   text-align: center;
+  font-family: 'Black Ops One', system-ui;
+  font-size: 4rem;
+  color: #565656;
 }
 
-ul,
-#game-nav {
+p {
+  font-family: 'Teko', sans-serif;
+  font-size: 40px;
+  color: rgb(108, 108, 108);
+}
+
+ul {
   display: flex;
-  flex-direction: row;
   list-style: none;
-  column-gap: 2em;
-  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 div {
-  border: 1px solid black;
-}
-
-#complete-game {
-  display: flex;
-  flex-direction: column;
-}
-
-#game-nav {
-  justify-content: space-around;
-  padding: 0.5em 0;
-}
-
-#grid {
-  height: 500px;
+  border: 2px solid black;
 }
 
 #levels {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 2em;
+  flex-direction: row;
+  justify-content: center;
+  width: auto;
+  column-gap: 100px;
+  margin: 0 auto;
+  padding: 30px 0 0 0;
+  font-size: 25px;
 }
-#levels > li {
-  border: 1px solid black;
-  padding: 20px 30%;
+
+.dif-btn {
+  border: 3px solid black;
+  padding: 5px 30px;
+  background-color: #bebdbd;
+}
+.dif-btn:hover {
+  background-color: #e6e6e6;
+}
+.dif-btn:active {
+  background-color: #565656;
+}
+
+/* indexhtml Style*/
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 50px;
+  margin: 0 100px;
+}
+
+.dropdown {
+  cursor: pointer;
+}
+.dropdown-content {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+  background-color: rgb(224, 224, 224);
+  row-gap: 15px;
+}
+.dropdown-content a {
+  color: black;
+  padding: 5px 5px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {
+  background-color: #f4f4f4;
+}
+
+.dropdown-content a:active {
+  background-color: #8c8c8c;
+}
+
+.dropdown:hover .dropdown-content {
+  visibility: visible;
+}
+
+#complete-game {
+  height: auto;
+  width: 550px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+#game-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+#game-nav button {
+  width: 7em;
+  height: 2.5em;
+  background-color: #565656;
+  color: rgb(175, 175, 175);
+  font-weight: bold;
+}
+
+#grid {
+  width: 100%; /* or a fixed width like 500px */
+  overflow: auto; /* Enable scrolling if the content exceeds the max height */
+  border: 1px solid #ccc; /* Optional border for the container */
+  max-width: 600px;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  border: px solid#000000;
+}
+th,
+td {
+  border: 1px solid #4f4f4f; /* Border for table cells */
+  padding: 8px; /* Padding inside cells */
+  text-align: left; /* Align text in cells */
+  background-color: #909090;
 }

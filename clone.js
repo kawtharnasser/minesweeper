@@ -1,87 +1,177 @@
-// Defining constant variables
+//constant
+
 const emojis = {
   normal: '😊',
   rightClick: '😮',
   win: '😎',
   lose: '😵',
   flag: '🚩',
-  mine: '💣'
+  mine: '🦈'
 }
-
-//elements references
-//1) have the mine remain
-let leftSideBox = document.querySelector('#left-side-box')
-
-//2) have the stopwatch
-let rightSideBox = document.querySelector('#right-side-box')
-
-//3) have the emoji and reset button
-
-let emojiButton = document.querySelector('#reset-button')
-
-//4) have the div that will contain the whole grid
-let gameGrid = document.querySelector('#grid')
-
-//5) have the beginner link
-beginner = document.querySelector('#beginner')
-//6) have the intermediate link
-intermediate = document.querySelector('#intermediate')
-//7) have the advanced link
-advance = document.querySelector('#advance')
-
 //variables
-let gridSettings = {
-  totalRows: 9,
-  totalColumns: 9,
-  totalMines: 10
-}
+let board = [] //the game grid
+let revealedCount = 0 //number of bombs revealed
+let timer = false //for the game timer
+let seconds = 0 // for the timer
+let gameStarted = false // for the startGame function
+let totalCells = 0 // the number of cells
 
-let seconds = 0
-let timer = false
-
-// game initalizing variables
-let gameStart = false
-let gameEnd = false
-
-// setting the grid
-
-// functions
-//1) a function that start the timer
-const startStopwatch = () => {
+//functions
+//1) a function that start the game stopwatch
+stopwatch = document.querySelector('#stopwatch')
+function startTimer() {
   if (!timer) {
     timer = setInterval(() => {
       seconds++
-      leftSideBox.textContent = seconds
+      stopwatch.textContent = seconds
     }, 1000)
   }
-} //startStopwatch()
+} //startTimer()
 
-//2) a function that create a unique id for each square.
-const squareId = (i, j) => {
-  return `cell(${i},${j})`
-} //for example squareId(0,0) = cell(0,0)
+//2) a function that initiate the game board
+let rows = 16 // Number of inner arrays
+let columns = 16 // Number of elements in each inner array
+let mines = 40
+const initiateBoard = () => {
+  for (let i = 0; i < rows; i++) {
+    let innerArray = []
+    for (let j = 0; j < columns; j++) {
+      innerArray.push(``)
+    }
+    board.push(innerArray)
+  }
 
-// an array that have all the grid values
-let squaresArray = []
-//3) a function that generate the grid
-const renderGrid = (totalRows, totalColumns) => {
-  let table, tr, td
-  gameGrid.innerHTML = ''
+  //calculateAdjacents();
 
-  table = document.createElement('table')
-  gameGrid.appendChild(table)
-  for (let i = 0; i < gridSettings.totalRows; i++) {
-    tr = document.createElement('tr')
-    table.appendChild(tr)
-    squaresArray[i] = []
-    for (let j = 0; j < gridSettings.totalColumns; j++) {
-      td = document.createElement('td')
-      td.textContent = '0'
-      tr.appendChild(td)
-      td.id = squareId(i, j)
-      td.classList.add('column') //give each grid square a class named square.
-      tr.classList.add('row')
-      squaresArray[i].push(td.innerHTML)
+  totalCells = rows * columns - mines
+  console.log(board)
+}
+initiateBoard()
+
+//3) a function that generate mines
+const placeMines = () => {
+  let placedMines = 0
+  while (placedMines < 40) {
+    const row = Math.floor(Math.random() * board.length)
+    const col = Math.floor(Math.random() * board.length)
+    if (board[row][col] === '') {
+      board[row][col] = emojis.mine
+      placedMines++
     }
   }
-} //return a grid when clicked, look at the event listener
+}
+placeMines()
+
+//4) calculate the number of mines surrounding each cell
+const calculateAdjacents = () => {
+  for (let r = 0; r < board.length; r++) {
+    for (let c = 0; c < board.length; c++) {
+      if (board[r][c] === emojis.mine) {
+        continue // Skip mine cells
+      }
+      let count = 0
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          if (
+            r + i >= 0 &&
+            r + i < board.length &&
+            c + j >= 0 &&
+            c + j < board.length &&
+            board[r + i][c + j] === emojis.mine
+          ) {
+            count++
+          }
+        }
+      }
+      board[r][c] = count // Set the count of adjacent mines
+    }
+  }
+}
+calculateAdjacents()
+
+//5) a function that create unique id for each cell
+const squareId = (r, c) => {
+  return `cell(${r},${c})`
+} //for example squareId(0,0) = cell(0,0)
+
+//6) print the grid on the screen
+const printGrid = () => {
+  let table, tr, td
+  grid.textContent = ''
+  table = document.querySelector('#grid')
+  for (let r = 0; r < board.length; r++) {
+    tr = document.createElement('tr')
+    table.appendChild(tr)
+
+    for (let c = 0; c < board.length; c++) {
+      td = document.createElement('td') //equal cell
+
+      td.id = squareId(r, c) //sqr id = cell(r,c)
+      td.addEventListener('click', () => {
+        if (!gameStarted) {
+          startTimer()
+          gameStarted = true
+        }
+        redvealeCell(r, c)
+      })
+      td.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        flagCell(r, c)
+      })
+      td.textContent = board[r][c]
+      tr.appendChild(td)
+    }
+  }
+}
+printGrid()
+
+let messageBox = document.querySelector('#message')
+//7) a function that redveale the cell when player click, or loose
+const redvealeCell = (row, column) => {
+  //if the cell was revealed before, or flagged, then return from the function
+  if (board[row][column].revealed || board[row][column].flagged) {
+    return
+  }
+  board[row][column].revealed = true
+  redvealeCell++
+
+  const td = document.querySelector(`#cell(${row},${column})`)
+
+  td.classList.add('revealed')
+
+  if (board[row][column] === emojis.mine) {
+    td.classList.add('mine')
+    messageBox.textContent = 'Game Over! You hit a Shark!.'
+    clearInterval(seconds)
+    return
+  }
+}
+
+//8) a function that put a flag is the cell was rightClicked
+const flagCell = (row, column) => {
+  const cell = document.querySelector(`#cell(${row},${column})`)
+  board[row][column].flagged = !board[row][column.flagged]
+  cell.classList.toggle('flag')
+  cell.textContent = emojis.flag
+}
+
+//9) a function that check winning condition
+const checkWin = () => {
+  if (revealedCount === totalCells) {
+    messageBox.textContent = 'Congratulation, You Win!'
+    clearInterval(seconds)
+  }
+}
+
+//10) a  function that restart the game
+const restartGame = () => {
+  clearInterval(startTimer)
+  seconds = 0
+  document.querySelector('#stopwatch').textContent = seconds
+  revealedCount = 0
+  gameStarted = false
+  let timer = false //for the game timer
+  let totalCells = 0 // the number of cells
+  initiateBoard()
+  printGrid()
+}

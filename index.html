@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minesweeper</title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
-    <title>Document</title>
   </head>
-  <body>
+  <body id="index">
     <header>
-      <h1 id="title">Minesweeper</h1>
+      <h1 id="title">Minesweeper <span> UNDERWATER</span></h1>
+
+      <p id="message" style="color: rgb(255, 255, 255)"></p>
 
       <nav>
         <ul>
@@ -27,19 +29,20 @@
         </ul>
       </nav>
     </header>
-
-    <div id="complete-game">
-      <div id="game-nav">
-        <button id="right-side-box" class="game-displayer" disabled>
-          mine remain
-        </button>
-        <button id="reset-button" class="game-displayer"><b>😊</b></button>
-        <button id="left-side-box" class="game-displayer" disabled>
-          timer
-        </button>
-      </div>
-      <div id="grid"></div>
+    <div id="complete-game" style="overflow-x: auto">
+      <table>
+        <tr id="game-nav">
+          <th id="right-side-box" class="game-displayer">
+            <button>mine remain</button>
+          </th>
+          <th id="reset-button" class="game-displayer"><button>😊</button></th>
+          <th id="stopwatch" class="game-displayer">
+            <button>timer</button>
+          </th>
+        </tr>
+        <tr id="grid"></tr>
+      </table>
     </div>
-    <button><a href="./page1.html">PAGE1</a></button>
+    <div id="about">hy</div>
   </body>
 </html>

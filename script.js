@@ -1,142 +1,271 @@
-// Defining constant variables
+// Constants
 const emojis = {
   normal: '😊',
   rightClick: '😮',
   win: '😎',
   lose: '😵',
   flag: '🚩',
-  mine: '💣'
+  mine: '🦈'
 }
 
-//elements references
-//1) have the mine remain
-let leftSideBox = document.querySelector('#left-side-box')
+// Variables
+let board = [] // The game grid
+let revealedCount = 0 // Number of bombs revealed
+let timer = false // For the game timer
+let seconds = 0 // For the timer
+let gameStarted = false // For the startGame function
+let totalCells = 0 // The number of cells
+let audio = new Audio('Untitled video - Made with Clipchamp.mp4')
+let flagClick = new Audio('rightclick.mp4')
+// Function to initiate the game board
+let rows = 16 // Number of inner arrays
+let columns = 16 // Number of elements in each inner array
+let mines = 40
 
-//2) have the stopwatch
-let rightSideBox = document.querySelector('#right-side-box')
+let minesRemain = document.querySelector('#right-side-box').innerHTML
+const beginner = document.querySelector('#beginner')
+const intermediate = document.querySelector('#intermediate')
+const advance = document.querySelector('#advance')
 
-//3) have the emoji and reset button
-
-let emojiButton = document.querySelector('#reset-button')
-
-//4) have the div that will contain the whole grid
-let gameGrid = document.querySelector('#grid')
-
-//5) have the beginner link
-beginner = document.querySelector('#beginner')
-//6) have the intermediate link
-intermediate = document.querySelector('#intermediate')
-//7) have the advanced link
-advance = document.querySelector('#advance')
-
-//variables
-let gridSettings = {
-  totalRows: 9,
-  totalColumns: 9,
-  totalMines: 10
-}
-
-let seconds = 0
-let timer = false
-
-// game initalizing variables
-let gameStart = false
-let gameEnd = false
-
-// setting the grid
-
-// functions
-//1) a function that start the timer
-const startStopwatch = () => {
+// Functions
+// Function to start the game stopwatch
+const stopwatch = document.querySelector('#stopwatch')
+function startTimer() {
   if (!timer) {
     timer = setInterval(() => {
       seconds++
-      leftSideBox.textContent = seconds
+      stopwatch.textContent = seconds
     }, 1000)
   }
-} //startStopwatch()
+}
 
-//2) a function that create a unique id for each square.
-const squareId = (i, j) => {
-  return `cell(${i},${j})`
-} //for example squareId(0,0) = cell(0,0)
-
-// an array that have all the grid values
-let squaresArray = []
-//3) a function that generate the grid
-const renderGrid = (totalRows, totalColumns) => {
-  let table, tr, td
-  gameGrid.innerHTML = ''
-
-  table = document.createElement('table')
-  gameGrid.appendChild(table)
-  for (let i = 0; i < gridSettings.totalRows; i++) {
-    tr = document.createElement('tr')
-    table.appendChild(tr)
-    squaresArray[i] = []
-    for (let j = 0; j < gridSettings.totalColumns; j++) {
-      td = document.createElement('td')
-      td.textContent = '0'
-      tr.appendChild(td)
-      td.id = squareId(i, j)
-      td.classList.add('column') //give each grid square a class named square.
-      tr.classList.add('row')
-      squaresArray[i].push(td.innerHTML)
+const initiateBoard = () => {
+  board = [] // Reset the board for a new game
+  for (let i = 0; i < rows; i++) {
+    let innerArray = []
+    for (let j = 0; j < columns; j++) {
+      innerArray.push({
+        revealed: false,
+        flagged: false,
+        mine: false,
+        adjacentMines: 0
+      })
     }
+    board.push(innerArray)
   }
-} //return a grid when clicked, look at the event listener
+  totalCells = rows * columns - mines
+  placeMines()
+  calculateAdjacents()
+  console.log(board)
+}
 
-//4) generate a bomb //dont work :C
-const generateMine = () => {
-  let remainingMines = 0 //to use in the while
-  while (remainingMines < gridSettings.totalMines) {
-    //generate a random number between 0 and array total rows
-    let randomRow = Math.floor(Math.random() * gridSettings.totalRows)
-    //generate a random number between 0 and array total columns
-    let randomColumn = Math.floor(Math.random() * gridSettings.totalColumns)
-    //let the cell variable = squareArray[random][random]
-    let cell = squaresArray[randomRow][randomColumn]
-    if (cell === '0') {
-      squaresArray[randomRow][randomColumn] = emojis.mine //give the cell value = 💣
-      remainingMines++ //to break the while
+// Function to generate mines
+const placeMines = () => {
+  let placedMines = 0
+  while (placedMines < mines) {
+    const row = Math.floor(Math.random() * rows)
+    const col = Math.floor(Math.random() * columns)
+    if (!board[row][col].mine) {
+      board[row][col].mine = true // Only set the mine property
+      placedMines++
     }
   }
 }
 
-//5) a function that handel players clicks //incomplete
-const handelClick = () => {}
+// Function to calculate the number of mines surrounding each cell
+const calculateAdjacents = () => {
+  for (let r = 0; r < board.length; r++) {
+    for (let c = 0; c < board[r].length; c++) {
+      if (board[r][c].mine) {
+        continue // Skip mine cells
+      }
+      let count = 0
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          const newRow = r + i
+          const newCol = c + j
+          // Check boundaries
+          if (
+            newRow >= 0 &&
+            newRow < rows &&
+            newCol >= 0 &&
+            newCol < columns &&
+            board[newRow][newCol].mine
+          ) {
+            count++ // Increment count for each adjacent mine
+          }
+        }
+      }
+      board[r][c].adjacentMines = count // Set the count of adjacent mines
+    }
+  }
+}
 
-//6) work in case the player loose. The function will stop the timer, change the emoji, and will reveal the Mines locations //incomplete
-const gameOver = () => {}
+// Function to create a unique ID for each cell
+const squareId = (r, c) => {
+  return `cell(${r},${c})`
+}
 
-//7) reset the grid
-const reset = () => {}
+// Function to print the grid on the screen
+const printGrid = () => {
+  let table, tr, td
+  const grid = document.querySelector('#grid')
+  grid.textContent = '' // Clear previous grid
+  table = document.createElement('table')
+  grid.appendChild(table)
 
-//Event listener
+  for (let r = 0; r < board.length; r++) {
+    tr = document.createElement('tr')
+    table.appendChild(tr)
+
+    for (let c = 0; c < board[r].length; c++) {
+      td = document.createElement('td')
+      td.id = squareId(r, c)
+      td.addEventListener('click', () => {
+        if (!gameStarted) {
+          startTimer()
+          gameStarted = true
+        }
+        revealCell(r, c)
+      })
+      td.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        flagCell(r, c)
+      })
+      td.textContent = ''
+      tr.appendChild(td)
+    }
+  }
+}
+const gameOver = () => {
+  // Iterate over the board and reveal all mines
+  for (let r = 0; r < board.length; r++) {
+    for (let c = 0; c < board[r].length; c++) {
+      if (board[r][c].mine) {
+        const td = document.getElementById(squareId(r, c))
+        td.classList.add('mine') // Add mine class for styling
+        td.innerHTML = emojis.mine // Show the mine emoji
+      }
+    }
+  }
+  clearInterval(timer) // Stop the timer
+  messageBox.textContent = 'Game Over! You hit a Shark!' // Show game over message
+}
+// Function to reveal the cell when the player clicks
+const revealCell = (row, column) => {
+  // If the cell was revealed before, or flagged, then return
+  if (board[row][column].revealed || board[row][column].flagged) {
+    return
+  }
+
+  board[row][column].revealed = true
+  revealedCount++
+
+  const td = document.getElementById(squareId(row, column))
+  td.classList.add('revealed')
+
+  // Check if the cell is a mine
+  if (board[row][column].mine) {
+    gameOver()
+
+    body.style.backgroundImage =
+      "url('https://th.bing.com/th/id/R.75da500dcfd5b8dcd13d811667205f55?rik=0euedb0IWDkLOw&riu=http%3a%2f%2fmedia.giphy.com%2fmedia%2fNZymcDPuVrVZu%2fgiphy.gif&ehk=8xus2w%2f5xowTgSx2aDren6WW4fTh1EGFJHXsmBpMITY%3d&risl=&pid=ImgRaw&r=0')"
+
+    audio.play()
+    return
+  }
+  // Show the number of adjacent mines or an empty string if there are none
+  if (board[row][column].adjacentMines > 0) {
+    td.textContent = board[row][column].adjacentMines // Show the count of adjacent mines
+  } else {
+    td.textContent = '' // Show nothing if there are no adjacent mines
+    td.style.backgroundColor = 'grey'
+    td.style.border = 'none'
+  }
+
+  // If there are no adjacent mines, reveal adjacent cells
+  if (board[row][column].adjacentMines === 0) {
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        const newRow = row + i
+        const newCol = column + j
+        // Check if the new cell is within the board boundaries
+        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < columns) {
+          revealCell(newRow, newCol) // Recursively reveal adjacent cells
+        }
+      }
+    }
+  }
+  checkWin()
+}
+
+// Function to put a flag if the cell was right-clicked
+const flagCell = (row, column) => {
+  const td = document.getElementById(squareId(row, column))
+  const cell = board[row][column]
+
+  cell.flagged = !cell.flagged // Toggle the flagged state
+
+  td.classList.toggle('flag')
+
+  if (cell.flagged) {
+    flagClick.play()
+    td.textContent = emojis.flag // Show flag emoji
+  } else {
+    td.textContent = '' // Clear the cell
+  }
+}
+
+// Function to check winning condition
+const checkWin = () => {
+  if (revealedCount === totalCells) {
+    messageBox.textContent = 'Congratulations, You Win!'
+    clearInterval(timer)
+  }
+}
+body = document.getElementById('index')
+messageBox = document.getElementById('message')
+// Function to restart the game
+const restartGame = () => {
+  clearInterval(timer)
+  seconds = 0
+  document.querySelector('#stopwatch').textContent = seconds
+  revealedCount = 0
+  gameStarted = false
+  timer = false
+  totalCells = 0
+  initiateBoard()
+  printGrid()
+  body.style.backgroundImage =
+    "url('https://th.bing.com/th/id/R.a61d96f23882c8e5a47ab16a6a7d7207?rik=QGLtMMZ1AoMqYw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f06%2fOcean-underwater-light-wallpaper-hd.jpg&ehk=RLmSM8K8ZQQn3YDnpMQGZfb5E3dJHQENNRqudKJONlY%3d&risl=1&pid=ImgRaw&r=0')"
+
+  messageBox.textContent = ''
+  grid.style.fontSize = '1em'
+  audio.pause()
+}
+
+// Setup event listeners for difficulty buttons
+document.getElementById('reset-button').addEventListener('click', restartGame)
+
 beginner.addEventListener('click', () => {
-  gridSettings = {
-    totalRows: 9,
-    totalColumns: 9,
-    totalMines: 10
-  }
-  renderGrid(gridSettings.totalRows, gridSettings.totalColumns)
-})
-intermediate.addEventListener('click', () => {
-  gridSettings = {
-    totalRows: 16,
-    totalColumns: 16,
-    totalMines: 40
-  }
-  renderGrid(gridSettings.totalRows, gridSettings.totalColumns)
-})
-advance.addEventListener('click', () => {
-  gridSettings = {
-    totalRows: 16,
-    totalColumns: 30,
-    totalMines: 99
-  }
-  renderGrid(gridSettings.totalRows, gridSettings.totalColumns)
+  rows = 9
+  columns = 9
+  mines = 10
+  restartGame()
 })
 
-//calling functions
-renderGrid(gridSettings.totalRows, gridSettings.totalColumns)
+intermediate.addEventListener('click', () => {
+  rows = 16
+  columns = 16
+  mines = 40
+  restartGame()
+})
+
+advance.addEventListener('click', () => {
+  rows = 16
+  columns = 30
+  mines = 99
+  restartGame()
+})
+// Start the game for the first time
+restartGame()

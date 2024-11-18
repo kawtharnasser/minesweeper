@@ -6,52 +6,6 @@
   box-sizing: border-box;
 }
 
-#page1 {
-  font-family: 'Teko', serif;
-  text-align: center;
-  height: 100vh;
-  margin: 0;
-
-  background: linear-gradient(to bottom, #8fb5d0, #427a4f);
-}
-
-#page1 h1 {
-  font-family: 'Black Ops One', serif;
-  display: flex;
-  flex-direction: column;
-  font-size: 6em;
-  color: #c5ecec;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgb(34, 57, 58);
-  margin: 0;
-}
-p {
-  font-size: 2em;
-  color: #07001c;
-  display: flex;
-  flex-direction: column;
-}
-#welcome {
-  margin: 60px 0 0 0;
-}
-
-.level-button {
-  display: inline;
-  margin: 0 50px;
-  padding: 10px 50px;
-  background-color: #1a6565;
-  color: rgb(255, 255, 255);
-  font-size: 30px;
-  font-family: 'Teko', serif;
-  font-weight: 1px;
-}
-
-a {
-  text-decoration: none;
-  color: rgb(0, 0, 0);
-}
-
-/*index page*/
 body {
   font-family: 'Teko', serif;
   margin: 0;
@@ -60,23 +14,35 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0; /* Light background for better contrast */
+  background-color: #5366b6;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-}
-#index {
   text-align: center;
-  background-image: url('https://th.bing.com/th/id/R.a61d96f23882c8e5a47ab16a6a7d7207?rik=QGLtMMZ1AoMqYw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f06%2fOcean-underwater-light-wallpaper-hd.jpg&ehk=RLmSM8K8ZQQn3YDnpMQGZfb5E3dJHQENNRqudKJONlY%3d&risl=1&pid=ImgRaw&r=0');
 }
 
-h1 {
-  font-size: 4em;
-  color: #d4fbf4;
-  margin: 0;
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+p {
+  font-size: 2em;
+  color: #07001c;
+  display: flex;
+  flex-direction: column;
+}
+
+#title {
+  font-size: 2em;
+  color: #d70000;
   font-family: 'Black Ops One', serif;
-  -webkit-text-stroke-width: 3px;
-  -webkit-text-stroke-color: #244c52;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #510000;
+  font-weight: 100;
+  text-shadow: 2px 2px black;
+  text-decoration: none;
+  margin: 0;
 }
 span {
   justify-content: flex-end;
@@ -88,9 +54,11 @@ span {
   font-family: 'Teko', serif;
   -webkit-text-stroke-width: 0;
   align-items: end;
+  text-shadow: none;
 }
 nav {
   display: flex;
+  justify-content: center;
 }
 
 nav li {
@@ -140,28 +108,26 @@ ul {
 
 #complete-game {
   /*a div that contain the game table*/
-  margin: 0 auto;
+  margin: 0 auto 100px auto;
   max-width: 60%;
   display: flex;
   justify-content: center;
   border: 5px solid rgb(6, 44, 69);
-  background-color: rgb(6, 44, 69);
-  max-height: 80vh;
-  max-width: 100vh;
+  max-height: 90vh;
+  max-width: 150vh;
 }
 
 #game-nav {
   /*table header*/
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
   border: 5px solid rgb(6, 44, 69);
+  background-color: #ffffff;
 }
 
 #game-nav button {
   width: 7em;
   height: 2.5em;
-  background-color: #083b43;
   color: rgb(175, 175, 175);
   font-weight: bold;
 }
@@ -171,44 +137,70 @@ td {
   border: 1px solid rgb(6, 44, 69);
   width: 1em;
   font-weight: bolder;
+  border: 1px solid rgb(6, 44, 69);
+  background-color: #e0e0e0;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  font-size: 1em;
+  border-radius: 5%;
 }
 td:hover {
   background-color: #649999;
 }
 table {
   background-color: white;
-
-  /*border-collapse: collapse;*/
+  /* border-collapse: collapse; */
   width: 100%;
   margin: 0 auto;
+  background-color: #2d2896;
 }
 
 #stopwatch,
-#right-side-box {
+#right-side-box,
+#reset-button {
   display: flex;
   font-weight: bolder;
-  background-color: rgb(6, 44, 69);
+  background-color: #062c45;
   width: 7em;
   height: 2.5em;
   color: rgb(175, 175, 175);
   align-items: center;
   justify-content: center;
   font-size: 1.2em;
+  margin: 3px;
+  border: 3px solid #3a4856;
+  border-radius: 5px;
+}
+
+#reset-button {
+  width: 4em;
+  height: auto;
+}
+
+#reset-button:hover {
+  color: #1a5f6e;
+  cursor: pointer;
+  border: 4px solid #03000b;
+}
+#reset-button:active {
+  background-color: #13354b;
 }
 
 #grid {
   table-layout: fixed;
   align-items: center;
 }
-td {
-  border: 1px solid rgb(6, 44, 69); /* Cell border */
-  background-color: #e0e0e0; /* Light gray background for cells */
-  height: 60px; /* Fixed height for cells */
-  width: 60px;
-  text-align: center; /* Center text */
-  font-size: 1em; /* Increased font size for visibility */
-}
 
 #about {
   margin: 100px;
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+}
+
+#message {
+  margin: 1em auto 0 auto;
+  color: rgb(33, 32, 32);
+  font-weight: 400;
 }

@@ -9,11 +9,15 @@
   </head>
   <body id="index">
     <header>
-      <h1 id="title">Minesweeper <span> UNDERWATER</span></h1>
+      <h1>
+        <a href="index.html" id="title"
+          >Minesweeper <span id="game-mode"> UNDERWATER</span></a
+        >
+      </h1>
 
-      <p id="message" style="color: rgb(255, 255, 255)"></p>
+      <p id="message">Right Click to Place a Flag</p>
 
-      <nav>
+      <nav id="navigation">
         <ul>
           <!-- <li>New Game</li> -->
           <li class="dropdown">
@@ -24,25 +28,33 @@
               <a href="#" id="advance">Advance</a>
             </div>
           </li>
-
+          <li class="dropdown">
+            Customize
+            <div class="dropdown-content">
+              <a href="#" id="original">Original</a>
+              <a href="#" id="underwater">Underwater</a>
+              <a href="#" id="jurassic">Jurassic</a>
+              <a href="#" id="lava">Lava</a>
+            </div>
+          </li>
           <li><a href="about.html" id="about-page">About</a></li>
         </ul>
       </nav>
     </header>
+
     <div id="complete-game" style="overflow-x: auto">
       <table>
         <tr id="game-nav">
-          <th id="right-side-box" class="game-displayer">
-            <button>mine remain</button>
+          <th class="game-displayer">
+            <button id="right-side-box" disabled></button>
           </th>
           <th id="reset-button" class="game-displayer"><button>😊</button></th>
           <th id="stopwatch" class="game-displayer">
-            <button>timer</button>
+            <button disabled>timer</button>
           </th>
         </tr>
         <tr id="grid"></tr>
       </table>
     </div>
-    <div id="about">hy</div>
   </body>
 </html>

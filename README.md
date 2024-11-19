@@ -1,8 +1,24 @@
-# minesweeper
+# Minesweeper
 
 ## Introduction
 
-Minesweeper is a game played on a grid of squares, some of contain mines. Safe squares contain numbers indicating how many mines are adjacent to them. The goal of the game is finding all the numbers, without clicking on any of the mines.
+<img src="./images/logo.png" alt="The Game Logo" style="width:100px; 
+display:flex;
+; 
+" >
+Minesweeper is a classic strategy game. The game feature a grid of clickable tiles, with hidden "_Mines_" scattered through the board. The objective of the game is to complete the board without denotating any mine. The game include clues about the mines locations, as most of the cells in the game grid has a number indicating the number of neighboring mines in each field. Variant of Minesweeper have been made that expand on the basic concepts, such as Minesweeper Online,_Minesweeper Arbiter_, _Minesweeper X_, and _Infinite Minesweeper_.
+
+### Rules
+
+Minesweeper rules are very simple. The board is divided into cells, with mines randomly distributed. To win, you need to open all the safe cells. The number on a cell shows the number of mines adjacent to it. Using this information, you can determine whether the cells are safe, or contain mines. Cells suspected of being mines can be marked with a flag using the right mouse button.
+
+## Getting Started
+
+## Attributions
+
+## Technologies used:
+
+## Next steps:
 
 ## User Stories
 

@@ -10,9 +10,7 @@ const emojis = {
 
 const gameMine = {
   original: '💣',
-  underwater: '🦈',
-  lava: '💥',
-  jurassic: '🦖'
+  underwater: '🦈'
 }
 const images = {
   original: {
@@ -23,18 +21,8 @@ const images = {
   underwater: {
     normal:
       "url('https://th.bing.com/th/id/R.a61d96f23882c8e5a47ab16a6a7d7207?rik=QGLtMMZ1AoMqYw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f06%2fOcean-underwater-light-wallpaper-hd.jpg&ehk=RLmSM8K8ZQQn3YDnpMQGZfb5E3dJHQENNRqudKJONlY%3d&risl=1&pid=ImgRaw&r=0')",
-    win: "url('')",
+    win: "url('https://th.bing.com/th/id/R.79b885018fac6b9727f2aadb671db40b?rik=9eoZPP%2bJQcYgBA&pid=ImgRaw&r=0')",
     lose: "url('https://th.bing.com/th/id/R.75da500dcfd5b8dcd13d811667205f55?rik=0euedb0IWDkLOw&riu=http%3a%2f%2fmedia.giphy.com%2fmedia%2fNZymcDPuVrVZu%2fgiphy.gif&ehk=8xus2w%2f5xowTgSx2aDren6WW4fTh1EGFJHXsmBpMITY%3d&risl=&pid=ImgRaw&r=0')"
-  },
-  lava: {
-    normal: '',
-    win: '',
-    lose: ''
-  },
-  jurassic: {
-    normal: '',
-    win: '',
-    lose: ''
   }
 }
 
@@ -80,9 +68,8 @@ const original = document.getElementById('original')
 
 const gameDisplayers = document.querySelectorAll('.game-displayer')
 const gameMode = document.querySelector('#game-mode')
-// lava
-// underwater
-// jurassic
+const title = document.getElementById('title')
+const navigation = document.getElementById('navigation')
 
 // Functions
 //1) Function to start the game stopwatch
@@ -211,7 +198,15 @@ const gameOver = () => {
   clearInterval(timer) // Stop the timer
   emojiButton.innerHTML = emojis.lose //change the emoji button value
   messageBox.textContent = 'Game Over! You hit a Shark!' //GameOver Message
-  body.style.backgroundImage = images.underwater.lose //gameOver background
+
+  if (isOriginal) {
+    body.style.backgroundImage =
+      "url('https://gamepedia.cursecdn.com/brawlhalla_gamepedia/thumb/3/38/KO_Hot_Lava.gif/177px-KO_Hot_Lava.gif?version=96187c56119c78ace5c62f006fbf1b1d')"
+    body.style.backgroundColor = 'darkred'
+  } else {
+    body.style.backgroundImage = images.underwater.lose //gameOver background
+  }
+
   isGameOver = true
   loseAudio.play()
 }
@@ -312,6 +307,7 @@ const checkWin = () => {
     messageBox.textContent = 'Congratulations, You Win!'
     clearInterval(timer) //stop the stopwatch
     emojiButton.innerHTML = emojis.win
+
     body.style.backgroundImage = images.underwater.win
   }
 }
@@ -329,10 +325,16 @@ const restartGame = () => {
   initiateBoard()
   renderGrid()
   isGameOver = false
-  body.style.backgroundImage = images.underwater.normal
+  if (isOriginal) {
+    body.style.backgroundImage = "url('')"
+    body.style.backgroundColor = ''
+  } else {
+    body.style.backgroundImage = images.underwater.normal
+  }
 
+  messageBox.textContent = 'Right Click to Place a Flag.'
   emojiButton.textContent = emojis.normal
-  messageBox.textContent = ''
+
   grid.style.fontSize = '1em'
   loseAudio.pause()
   minesRemain.textContent = mines
@@ -362,16 +364,16 @@ advance.addEventListener('click', () => {
   restartGame()
 })
 
-// const underwater = addEventListener('')
-const title = document.getElementById('title')
-const navigation = document.getElementById('navigation')
+let isOriginal = false
+let isUnderwater = false
 original.addEventListener('click', () => {
   gameMode.textContent = 'ORIGINAL'
   gameDisplayers.forEach((displayer) => {
-    console.log(displayer)
     displayer.style.backgroundColor = 'white'
     displayer.style.color = '#13354b'
   })
+  isOriginal = true
+  isUnderwater = false
   body.style.backgroundImage = images.original.normal
   title.style.color = '#d4ede9'
   grid.style.borderColor = '#3a4856'
@@ -383,18 +385,20 @@ original.addEventListener('click', () => {
 
 underwater.addEventListener('click', () => {
   gameMode.textContent = 'UNDERWATER'
-  gameDisplayers.forEach((displayer) => {
-    console.log(displayer)
-    displayer.style.backgroundColor = 'white'
-    displayer.style.color = '#13354b'
-  })
-  body.style.backgroundImage = images.original.normal
+  body.style.backgroundImage = images.underwater.normal
   title.style.color = ''
   grid.style.borderColor = ''
   navigation.style.color = ''
   minesRemain.style.color = ''
-  emojis.mine = gameMine.original
   minesRemain.style.backgroundColor = ''
+  emojis.mine = gameMine.underwater
+  gameDisplayers.forEach((displayer) => {
+    displayer.style.backgroundColor = ''
+    displayer.style.color = ''
+  })
+
+  isOriginal = false
+  isUnderwater = true
 })
 
 // Start the game for the first time

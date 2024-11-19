@@ -5,12 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Minesweeper</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://icons.veryicon.com/png/Application/Crystal%20Project%20Application/kmines.png"
+      type="image/x-icon"
+    />
   </head>
-  <body>
+  <body id="about">
     <header>
       <h1>
-        <a href="index.html" id="title">Minesweeper <span> UNDERWATER</span></a>
+        <a href="index.html" id="title"
+          ><span>ABOUT</span>
+          <tr>
+            Minesweeper
+          </tr></a
+        >
       </h1>
     </header>
+    <article id="introduction">
+      <h2>Introduction</h2>
+      <p>
+        Minesweeper is a classic strategy game. The game feature a grid of
+        clickable tiles, with hidden "Mines" scattered through the board. The
+        objective of the game is to complete the board without denotating any
+        mine. The game include clues about the mines locations, as most of the
+        cells in the game grid has a number indicating the number of neighboring
+        mines in each field. Variant of Minesweeper have been made that expand
+        on the basic concepts, such as Minesweeper Online,Minesweeper Arbiter,
+        Minesweeper X, and, Infinite Minesweeper.
+      </p>
+    </article>
+
+    <article id="rules">
+      <h2>Rules</h2>
+      <p>
+        Minesweeper rules are very simple. The board is divided into cells, with
+        mines randomly distributed. To win, you need to open all the safe cells.
+        The number on a cell shows the number of mines adjacent to it. Using
+        this information, you can determine whether the cells are safe, or
+        contain mines. Cells suspected of being mines can be marked with a flag
+        using the right mouse button.
+      </p>
+    </article>
+    <article id="interface">
+      <h2>The Game Interface</h2>
+
+      <figure>
+        <figcaption>Navigation</figcaption>
+        <img src="./images/newgame.png" alt="The Game Navigation" />
+      </figure>
+
+      <p>Game Difficulties</p>
+      <div class="levels">
+        <figure class="lvl">
+          <figcaption>Beginner</figcaption>
+          <img src="./images/easy.png" alt="Beginner Difficulty" />
+        </figure>
+
+        <figure class="lvl">
+          <figcaption>Intermediate</figcaption>
+          <img
+            src="./images/intermidiatelvl.png"
+            alt="Intermediate Difficulty"
+          />
+        </figure>
+
+        <figure class="lvl">
+          <figcaption>Advanced</figcaption>
+          <img src="./images/hard.png" alt="Advanced Difficulty" />
+        </figure>
+      </div>
+
+      <p>Game Theme</p>
+      <div class="levels">
+        <figure class="lvl">
+          <figcaption>Original Theme</figcaption>
+          <img src="./images/originaltheme.png" />
+        </figure>
+        <figure class="lvl">
+          <figcaption>Underwater Theme</figcaption>
+          <img src="./images/gameinterface.png" />
+        </figure>
+      </div>
+
+      <p>Important Icons</p>
+      <div class="levels">
+        <figure class="lvl">
+          <figcaption>Flag Icon</figcaption>
+          <img src="./images/flagicon.png" />
+          <p>
+            A flag on a square means that there is a hidden mine within that
+            square. These flags are placed by you, and should be used when you
+            are sure of the location of the bomb/ shark. You don’t need to place
+            the flags to win, but using them would certainly be easier than
+            trying to keep track of the mines yourself.
+          </p>
+        </figure>
+        <figure class="lvl">
+          <figcaption>Shark Icon</figcaption>
+          <img src="./images/sharkicon.png" />
+        </figure>
+        <figure class="lvl">
+          <figcaption>Bomb Icon</figcaption>
+          <img src="./images/bombicon.png" />
+        </figure>
+      </div>
+    </article>
+    <article id="strategy">
+      <h2>Strategy, and Patterns</h2>
+      <p></p>
+    </article>
+    <footer>
+      <button><a href="./index.html">Back to the Game</a></button>
+    </footer>
   </body>
 </html>

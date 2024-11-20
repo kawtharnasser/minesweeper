@@ -118,7 +118,6 @@ ul {
 #complete-game {
   /*a div that contain the game table*/
   margin: 0 auto 100px auto;
-  max-width: 60%;
   display: flex;
   justify-content: center;
   border: 5px solid rgb(6, 44, 69);
@@ -152,7 +151,7 @@ td {
   height: 2.5em;
   width: 2.5em;
   text-align: center;
-  font-size: 1em;
+  font-size: 0.8em;
   border-radius: 5%;
 }
 td:hover {

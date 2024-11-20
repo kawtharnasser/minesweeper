@@ -176,6 +176,7 @@ const renderGrid = () => {
       //contextmenu: An element is right-clicked to open a context menu, from w3school "HTML DOM Events"
       td.addEventListener('contextmenu', (e) => {
         e.preventDefault() //prevent the default menu
+
         flagCell(r, c) //add a flag emoji when the player right click
       })
       td.textContent = '' //all the cells have the value of empty string
@@ -401,6 +402,8 @@ underwater.addEventListener('click', () => {
 
   isOriginal = false
 })
+
+messageBox.addEventListener('click', restartGame)
 
 // Start the game for the first time
 restartGame()

@@ -335,7 +335,8 @@ const restartGame = () => {
     body.style.backgroundImage = images.underwater.normal
   }
 
-  messageBox.textContent = 'Right Click to Place a Flag.'
+  messageBox.textContent =
+    "Right Click to Place a Flag, Or Hold if you're using a Smartphone"
   emojiButton.textContent = emojis.normal
 
   grid.style.fontSize = '1em'
@@ -361,8 +362,8 @@ intermediate.addEventListener('click', () => {
   restartGame()
 })
 advance.addEventListener('click', () => {
-  rows = 16
-  columns = 30
+  rows = 30
+  columns = 16
   mines = 99
   restartGame()
 })

@@ -7,12 +7,12 @@ Minesweeper is a timeless strategic game that challenges players to navigate a g
 ## Game Features
 
 - **Classic Gameplay:** You can enjoy the traditional Minesweeper experience with a grid of tiles and hidden mines.
-  ![The Game Picture](.\images\gamepic2.png)
+  ![The Game Picture](./images/gamepic2.png)
 
 - **User-Friendly Interface:** Intuitive design for easy navigation.
 
 - **Multiple Difficulty Levels:** Choose from beginner, intermediate, and Advance levels to suit your skill.
-  ![Game Difficulties](.\images\difficulity.png)
+  ![Game Difficulties](./images/difficulity.png)
 
 - **The Timer:** the timer track your best times, which helps you challenge yourself to improve.
 

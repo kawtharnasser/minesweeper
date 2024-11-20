@@ -5,13 +5,10 @@ const emojis = {
   win: '😎',
   lose: '😵',
   flag: '🚩',
-  mine: '🦈'
+  mine: '🦈',
+  originMine: '💣'
 }
 
-const gameMine = {
-  original: '💣',
-  underwater: '🦈'
-}
 const images = {
   original: {
     normal: '',
@@ -36,17 +33,21 @@ let totalCells = 0 // to check for winning
 
 let timer = false // For the game timer
 let seconds = 0 // For the timer
-
+let dummyMine = '🦈'
 // the initial number of rows, and col
-let rows = 4
-let columns = 4
-let mines = 1
+let rows = 9
+let columns = 9
+let mines = 10
 
 //sound Effects
 let loseAudio = new Audio('Untitled video - Made with Clipchamp.mp4')
 let flagClick = new Audio('rightclick.mp4')
 
 let winAudio = new Audio('winbrass-39632.mp3')
+let explosion = new Audio('explosion-42132.mp3')
+
+//for the theme
+let isOriginal = false
 
 //elements selector
 //the game levels
@@ -197,18 +198,20 @@ const gameOver = () => {
   }
   clearInterval(timer) // Stop the timer
   emojiButton.innerHTML = emojis.lose //change the emoji button value
-  messageBox.textContent = 'Game Over! You hit a Shark!' //GameOver Message
 
   if (isOriginal) {
     body.style.backgroundImage =
-      "url('https://gamepedia.cursecdn.com/brawlhalla_gamepedia/thumb/3/38/KO_Hot_Lava.gif/177px-KO_Hot_Lava.gif?version=96187c56119c78ace5c62f006fbf1b1d')"
+      "url('https://pa1.narvii.com/6803/4104ee2d5b7ed40f003bedab5c6d770af9eb2b25_hq.gif')"
     body.style.backgroundColor = 'darkred'
+    messageBox.textContent = 'Game Over! You hit a Mine!'
+    explosion.play()
   } else {
     body.style.backgroundImage = images.underwater.lose //gameOver background
+    messageBox.textContent = 'Game Over! You hit a Shark!'
+    loseAudio.play()
   }
 
   isGameOver = true
-  loseAudio.play()
 }
 //8) a Function that reveals the cell when the player clicks
 const revealCell = (row, column) => {
@@ -364,23 +367,21 @@ advance.addEventListener('click', () => {
   restartGame()
 })
 
-let isOriginal = false
-let isUnderwater = false
 original.addEventListener('click', () => {
   gameMode.textContent = 'ORIGINAL'
   gameDisplayers.forEach((displayer) => {
     displayer.style.backgroundColor = 'white'
     displayer.style.color = '#13354b'
   })
-  isOriginal = true
-  isUnderwater = false
+
   body.style.backgroundImage = images.original.normal
   title.style.color = '#d4ede9'
   grid.style.borderColor = '#3a4856'
   navigation.style.color = 'white'
   minesRemain.style.color = '#13354b'
-  emojis.mine = gameMine.original
+  emojis.mine = emojis.originMine
   minesRemain.style.backgroundColor = 'white'
+  isOriginal = true
 })
 
 underwater.addEventListener('click', () => {
@@ -391,14 +392,13 @@ underwater.addEventListener('click', () => {
   navigation.style.color = ''
   minesRemain.style.color = ''
   minesRemain.style.backgroundColor = ''
-  emojis.mine = gameMine.underwater
+  emojis.mine = dummyMine
   gameDisplayers.forEach((displayer) => {
     displayer.style.backgroundColor = ''
     displayer.style.color = ''
   })
 
   isOriginal = false
-  isUnderwater = true
 })
 
 // Start the game for the first time

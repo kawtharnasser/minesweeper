@@ -2,23 +2,33 @@
 
 ## Introduction
 
-<img src="./images/logo.png" alt="The Game Logo" style="width:100px; 
-display:flex;
-; 
-" >
-Minesweeper is a classic strategy game. The game feature a grid of clickable tiles, with hidden "_Mines_" scattered through the board. The objective of the game is to complete the board without denotating any mine. The game include clues about the mines locations, as most of the cells in the game grid has a number indicating the number of neighboring mines in each field. Variant of Minesweeper have been made that expand on the basic concepts, such as Minesweeper Online,_Minesweeper Arbiter_, _Minesweeper X_, and _Infinite Minesweeper_.
+Minesweeper is a timeless strategic game that challenges players to navigate a grid filled with hidden "_mines_", The goal is to clear the board without detonating any mines.Throughout the game, players receive valuable clues, many tiles display numbers indicating how many mines are adjacent to them, helping to deduce safe moves. I chose to build Minesweeper for my project because it always was one of my favorite games during my childhood, and building it is challenging because of the amount of requirements it have.
 
-### Rules
+## Game Features
 
-Minesweeper rules are very simple. The board is divided into cells, with mines randomly distributed. To win, you need to open all the safe cells. The number on a cell shows the number of mines adjacent to it. Using this information, you can determine whether the cells are safe, or contain mines. Cells suspected of being mines can be marked with a flag using the right mouse button.
+- **Classic Gameplay:** You can enjoy the traditional Minesweeper experience with a grid of tiles and hidden mines.
+
+- **Multiple Difficulty Levels:** Choose from beginner, intermediate, and Advance levels to suit your skill.
+
+- **User-Friendly Interface:** Intuitive design for easy navigation. the
+- **Timer:** the timer track your best times, which helps you challenge yourself to improve. -**Customizable Settings:** you can Adjust the game theme to enhance your experience.
 
 ## Getting Started
 
-## Attributions
+### Prerequisites
 
-## Technologies used:
+To run the Minesweeper game, you'll need:
 
-## Next steps:
+- An electronic devise (PC, Laptop, Smartphone)
+- A modern web browser (Chrome, Firefox, Safari, etc.)
+
+### How To Play
+
+1. Click on a square to reveal it. If it's a mine, you lose the game.
+2. If the square is safe, it will display a number indicating how many mines are adjacent to that square.
+3. Use the numbers as clues to deduce where mines are located. For example, if a square shows "1", there is one mine in the adjacent squares.
+4. Right-click (or long-press on mobile) to flag a square you suspect contains a mine.
+5. Your goal is to reveal all non-mine squares without triggering any mines.
 
 ## User Stories
 
@@ -42,15 +52,15 @@ Minesweeper rules are very simple. The board is divided into cells, with mines r
 
 - As a user, I want to see all the numbers surrounding an empty square after clicking it.
 
-- As a user, I want an Emoji that gives feedback to every click I make.
+- As a user, I want an Emoji that gives feedback when I win, Loose, or place a flag.
 
 - As a user, I want visual feedback after clicking Grid squares.
 
 - As a user, I want to be able to place flags on areas I believe contain a mine.
 
-- As a user, I want to see a number if I clicked on a safe square.
+- As a user, I want to see an empty square, or a number if I clicked on a safe square.
 
-- As a user, I want to view the mines’ location if I loosed.
+- As a user, I want to view all mine's locations if I loosed.
 
 - As a user, I want to be presented with a clear message indicating that I won the game.
 
@@ -58,7 +68,7 @@ Minesweeper rules are very simple. The board is divided into cells, with mines r
 
 ## Pseudocode
 
-### Define the required constants:
+#### Define the required constants:
 
 // I will create a constant emojis object that contain all the emojis necessary for the game
 // I will create an object named gridSettings, that contain the total number of mines, numbers of rows, and columns in the Grid,
@@ -79,7 +89,7 @@ Minesweeper rules are very simple. The board is divided into cells, with mines r
 
 //I will create a variable named Grid, it will contain the whole grid, containing mines, numbers, and empty squares.
 
-### Cached Element References
+#### Cached Element References
 
 // I will create an element reference to the left textbox above the game grid, that contains the mine remaining on the grid.
 
@@ -89,7 +99,7 @@ Minesweeper rules are very simple. The board is divided into cells, with mines r
 
 // I will create an element reference to the grid
 
-### Functions:
+#### Functions:
 
 // I will make a function called startStopwatch, that will count the time the player takes to win or lose the game.
 // I will make a function called stopStopwach, that will stop the stopwatch when the player wins, or loose.
@@ -115,10 +125,36 @@ Minesweeper rules are very simple. The board is divided into cells, with mines r
 
 // I will create a function called playerWin, that will work in case the player. It will stop the timer and change the button emoji.
 
-### Event listener
+#### Event listener
 
 //I will create an event listener that activates the handleClick function if the user clicked on the grid square.
 
 // I will create an event listener that activates the reset function when the userclicksk on the button emoji.
 
 // I will create an event listener that activate the placeFlag function when the user right click on a grid square.
+
+## Technologies used:
+
+- **HTML (HyperText Markup Language):** HTML is used to create the Web pages, and structure the game's user interface. It provides the framework for the grid, navigation par buttons, and other interactive elements.
+
+- **CSS (Cascading Style Sheets):** CSS discripe how HTML elements are displayed on screens. It was employed for styling the game, ensuring it is visually appealing and responsive.
+- **JavaScript:** JavaScript is the world's most popular programming language It is the backbone of the game's functionality. It handles the game logic, including adjacent cells, tile revealing, mine placement, and win/loss conditions. This makes the game interactive and responsive to user actions.
+
+- **Version Control System(Git):** Git is used for version control, and source code management. Git helps keeping track of code changes, and collaborate on code. Which ensures that the project can be maintained and updated efficiently.
+
+- **GitHub:** GitHub is a web-based platform that uses Git to help developers manage and track changes in their code. It allows multiple people to collaborate on a project, track revisions, and contribute to code from anywhere in the world.
+
+## Next steps:
+
+In the future I will improve this game by adding more themes (Cyberpunk Theme, Jurassic Theme, etc), and other customization features. I will improve the game interface and add better sound effects, and animations. In addition to challenging playing modes.
+I will add a database to the game for the players to view their best score, and compete against players from around the world.
+
+## Attributions
+
+- **[Pixabay:](https://pixabay.com/sound-effects/)** The source for Audio, and Sound Effects.
+
+- **[Gamesver](https://www.gamesver.com/minesweeper-explained-how-to-play-rules/), [Minsweeper Wiki](http://www.minesweeper.info/wiki/Strategy), and [Wikipedia](<https://en.wikipedia.org/wiki/Minesweeper_(video_game)>)** Used to get more information's about the game
+
+- **[W3schools:](https://www.w3schools.com/)** Used to help improve the design.
+
+- **[Itsourcecode](https://itsourcecode.com/javascript-tutorial/how-to-create-minesweeper-in-javascript-with-sample-code/), and [Opengenus](https://iq.opengenus.org/minesweeper-game-using-js/)** Had a previous Minesweepers projects used as a reference.

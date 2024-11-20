@@ -199,79 +199,76 @@ table {
   align-items: center;
 }
 
-#about {
-  margin: 100px;
-  background-color: white;
-  width: 100%;
-  height: 100vh;
-}
-
 #message {
   margin: 1em auto 0 auto;
   color: rgb(33, 32, 32);
   font-weight: 400;
-}
-
-.speech-bubble {
   position: relative;
   background: #e1e1e1;
-  color: white;
   padding: 15px;
   border-radius: 10px;
   max-width: 300px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   box-shadow: 2px 2px #000000;
-}
-.speech-bubble::after {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 10px;
-  border-style: solid;
-  border-color: #ebebeb transparent transparent transparent;
 }
 
 /* about page */
+
 #about {
+  width: 100%;
   margin: 0;
   height: auto;
+  padding: 20px;
   text-align: center;
+  position: absolute;
+  flex-wrap: wrap;
+  background-color: #5366b6;
 }
 #about h1 {
-  font-size: 1.7em;
+  font-size: 2em;
   margin: 50px 0;
 }
 
 h2 {
   font-size: 40px;
   font-weight: bold;
+  margin-top: 20px;
 }
 
-#about p {
-  font-size: 30px;
+#about p,
+#about li {
+  font-size: 1.5em;
   font-weight: 500;
+}
+#about ul {
+  list-style: inside;
+  flex-direction: column;
+  list-style-position: inside;
+}
+#about ol {
+  list-style-position: inside;
 }
 
 img {
-  height: 200px;
-  width: auto;
+  height: auto;
+  max-width: 100%;
   border: 1px solid black;
 }
 figure {
   border: 1px solid rgb(110, 110, 110);
+  margin: 20px 10px;
 }
 
 article {
-  margin: 0 auto;
-  font-size: 30px;
-  font-weight: bold;
-  background-color: white;
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .levels {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
 }
@@ -280,5 +277,46 @@ article {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 10px;
+  padding: 20px;
+  flex: 1 1 200px;
+}
+figcaption {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.icon {
+  max-width: 150px;
+  height: auto;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.navigation-bar {
+  max-width: 1000px;
+  height: auto;
+  padding: 20px auto;
+}
+
+#back-button {
+  font-size: 1.3em;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 30px;
+  width: 1000px;
+  height: 50px;
+  margin: 50px auto;
+}
+
+#sourse {
+  color: #2d2896;
+  text-decoration: underline;
+}
+#sourse {
+  color: #2d2896;
+  text-decoration: underline;
+}
+#sourse:visited {
+  color: #062c45;
 }

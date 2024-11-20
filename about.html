@@ -25,37 +25,50 @@
     <article id="introduction">
       <h2>Introduction</h2>
       <p>
-        Minesweeper is a classic strategy game. The game feature a grid of
-        clickable tiles, with hidden "Mines" scattered through the board. The
-        objective of the game is to complete the board without denotating any
-        mine. The game include clues about the mines locations, as most of the
-        cells in the game grid has a number indicating the number of neighboring
-        mines in each field. Variant of Minesweeper have been made that expand
-        on the basic concepts, such as Minesweeper Online,Minesweeper Arbiter,
-        Minesweeper X, and, Infinite Minesweeper.
+        Minesweeper is a timeless strategic game that challenges players to
+        navigate a grid filled with hidden "mines." The goal is to clear the
+        board without detonating any mines.Throughout the game, players receive
+        valuable clues: many tiles display numbers indicating how many mines are
+        adjacent to them, helping to deduce safe moves.
       </p>
     </article>
 
-    <article id="rules">
-      <h2>Rules</h2>
-      <p>
-        Minesweeper rules are very simple. The board is divided into cells, with
-        mines randomly distributed. To win, you need to open all the safe cells.
-        The number on a cell shows the number of mines adjacent to it. Using
-        this information, you can determine whether the cells are safe, or
-        contain mines. Cells suspected of being mines can be marked with a flag
-        using the right mouse button.
-      </p>
+    <article id="how-to-play">
+      <h2>How To Play</h2>
+      <p>To play Minesweeper, follow these simple steps:</p>
+      <ol>
+        <li>
+          Click on a square to reveal it. If it's a mine, you lose the game.
+        </li>
+        <li>
+          If the square is safe, it will display a number indicating how many
+          mines are adjacent to that square.
+        </li>
+        <li>
+          Use the numbers as clues to deduce where mines are located. For
+          example, if a square shows "1", there is one mine in the adjacent
+          squares.
+        </li>
+        <li>
+          Right-click (or long-press on mobile) to flag a square you suspect
+          contains a mine.
+        </li>
+        <li>
+          Your goal is to reveal all non-mine squares without triggering any
+          mines.
+        </li>
+        <li>
+          You can read more about the game strategies, and patterns
+          <a href="http://www.minesweeper.info/wiki/Strategy" id="sourse"
+            >Minesweeper Info Wiki</a
+          >
+        </li>
+      </ol>
     </article>
     <article id="interface">
       <h2>The Game Interface</h2>
 
-      <figure>
-        <figcaption>Navigation</figcaption>
-        <img src="./images/newgame.png" alt="The Game Navigation" />
-      </figure>
-
-      <p>Game Difficulties</p>
+      <p class="sub-title">Game Difficulties</p>
       <div class="levels">
         <figure class="lvl">
           <figcaption>Beginner</figcaption>
@@ -92,31 +105,71 @@
       <div class="levels">
         <figure class="lvl">
           <figcaption>Flag Icon</figcaption>
-          <img src="./images/flagicon.png" />
+          <img src="./images/flagicon.png" class="icon" />
           <p>
-            A flag on a square means that there is a hidden mine within that
-            square. These flags are placed by you, and should be used when you
-            are sure of the location of the bomb/ shark. You don’t need to place
-            the flags to win, but using them would certainly be easier than
-            trying to keep track of the mines yourself.
+            The flags are placed by you, and should be used when you are sure of
+            the location of the Mine/ shark.
           </p>
         </figure>
         <figure class="lvl">
-          <figcaption>Shark Icon</figcaption>
-          <img src="./images/sharkicon.png" />
-        </figure>
-        <figure class="lvl">
-          <figcaption>Bomb Icon</figcaption>
-          <img src="./images/bombicon.png" />
+          <figcaption>Mine, and Shark Icon</figcaption>
+          <div class="levels">
+            <img
+              src="./images/sharkicon.png"
+              style="margin-right: 10px"
+              class="icon"
+            />
+            <img src="./images/bombicon.png" class="icon" />
+          </div>
+
+          <p>
+            When the Shark/ Mine Icons appear in the game grid, then that means
+            that You loosed the game.
+          </p>
         </figure>
       </div>
+
+      <figure>
+        <figcaption>The Game Navigation</figcaption>
+        <img
+          src="images/Screenshot 2024-11-19 094505.png"
+          class="navigation-bar"
+        />
+        <ul>
+          <li>
+            The mines remaining indicator is generally found to the left of the
+            emoji. It helps players keep track of how many mines they still need
+            to identify and flag.
+          </li>
+          <li>
+            The emoji is typically located at the top center of the game
+            interface.It usually begins as a smiling face, indicating that the
+            game is in progress.If a mine is triggered, the emoji changes to a
+            surprised or sad face, signifying that the game has ended.it also
+            can be used to restart the game
+          </li>
+          <li>
+            The timer is usually positioned to the right of the emoji. The timer
+            begins when you make your first click and stops when you finish the
+            game.
+          </li>
+        </ul>
+      </figure>
     </article>
-    <article id="strategy">
-      <h2>Strategy, and Patterns</h2>
-      <p></p>
+
+    <article id="conclusion">
+      <h2>Conclusion</h2>
+      <p>
+        Minesweeper is not just a game of chance; it's a test of strategy,
+        logic, and quick thinking. With practice, you can develop the skills
+        needed to successfully navigate through the mines and clear the board.
+        Have fun playing!
+      </p>
     </article>
     <footer>
-      <button><a href="./index.html">Back to the Game</a></button>
+      <button id="back-button">
+        <a href="./index.html">Back to the Game</a>
+      </button>
     </footer>
   </body>
 </html>
